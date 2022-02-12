@@ -1,6 +1,8 @@
 package kea.sem3.jwtdemo.configuration;
 
 import kea.sem3.jwtdemo.entity.*;
+import kea.sem3.jwtdemo.repositories.CarRepository;
+import kea.sem3.jwtdemo.repositories.MemberRespository;
 import kea.sem3.jwtdemo.security.UserRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,9 +18,13 @@ public class MakeTestData implements ApplicationRunner {
 
 
     UserRepository userRepository;
+    MemberRespository memberRespository;
+    CarRepository carRepository;
 
-    public MakeTestData(UserRepository userRepository) {
+    public MakeTestData(UserRepository userRepository, MemberRespository memberRespository, CarRepository carRepository) {
         this.userRepository = userRepository;
+        this.memberRespository = memberRespository;
+        this.carRepository = carRepository;
     }
 
     public  void makePlainUsers(){
@@ -26,7 +32,6 @@ public class MakeTestData implements ApplicationRunner {
         user.addRole(Role.USER);
         BaseUser admin = new BaseUser("admin", "admin@a.dk", "test12");
         admin.addRole(Role.ADMIN);
-
         BaseUser both = new BaseUser("user_admin", "both@a.dk", "test12");
         both.addRole(Role.USER);
         both.addRole(Role.ADMIN);
@@ -34,6 +39,17 @@ public class MakeTestData implements ApplicationRunner {
         userRepository.save(user);
         userRepository.save(admin);
         userRepository.save(both);
+
+
+        memberRespository.save(new Member("KW","kw@a.dk","test12","Kurt","Wonnegut","Lyngbyvje 34","Lyngby","2800"));
+        memberRespository.save(new Member("HW","hw@a.dk","test12","Hanne","Wonnegut","Lyngbyvje 34","Lyngby","2800"));
+
+        carRepository.save(new Car("Volvo", "C40", 560,10));
+        carRepository.save(new Car("Volvo", "V70", 500,10));
+        carRepository.save(new Car("Volvo", "V49", 400,10));
+        carRepository.save(new Car("Suzuki", "Vitara", 500,14));
+        carRepository.save(new Car("Suzuki", "Vitara", 500,14));
+        carRepository.save(new Car("Suzuki", "S-Cross", 500,14));
 
         System.out.println("########################################################################################");
         System.out.println("########################################################################################");
