@@ -1,12 +1,12 @@
 package kea.sem3.jwtdemo.entity;
 
+import kea.sem3.jwtdemo.dto.ReservationRequest;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity(name = "Reservation")
 @Table
@@ -37,4 +37,11 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "username")
     private Member member;
+
+    public Reservation(ReservationRequest body) {
+        this.reservationDate = body.getReservationDate();
+        this.rentalDate = body.getRentalDate();
+        this.car = body.getCar();
+        this.member = body.getRenter();
+    }
 }

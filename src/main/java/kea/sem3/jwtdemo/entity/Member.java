@@ -69,6 +69,7 @@ public class Member extends BaseUser {
     }
 
     public Member(MemberRequest body) {
+        super(body.getUserName(), body.getPassword(), body.getEmail());
         this.firstName = body.getFirstName();
         this.lastName = body.getLastName();
         this.street = body.getStreet();

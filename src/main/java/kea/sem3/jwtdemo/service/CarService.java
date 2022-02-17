@@ -20,13 +20,13 @@ public class CarService {
         List<Car> cars =  carRepository.findAll();
         return CarResponse.getCarsFromEntities(cars);
     }
-    public CarResponse getCar(int id,boolean all) throws Exception {
+    public CarResponse getCar(int id,boolean all) {
         Car car = carRepository.findById(id).orElseThrow(()->new Client4xxException("No car with this id exists"));
         return new CarResponse(car,false);
     }
     public CarResponse addCar(CarRequest body){
         Car carNew = carRepository.save(new Car(body));
-        return new CarResponse(carNew,true);
+        return new CarResponse(carNew,false);
     }
     public CarResponse editCar(CarRequest body,int id){
         Car carToEdit = new Car(body);
