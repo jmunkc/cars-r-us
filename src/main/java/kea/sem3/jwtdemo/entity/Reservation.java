@@ -25,16 +25,16 @@ public class Reservation {
     private LocalDateTime rentalDate;
 
     @UpdateTimestamp
-    private LocalDateTime updateReservationDate;
+    private LocalDateTime editedReservationDate;
 
     @UpdateTimestamp
-    private LocalDateTime updateRentalDate;
+    private LocalDateTime editedRentalDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "user_id", referencedColumnName = "username")
     private Member member;
 }

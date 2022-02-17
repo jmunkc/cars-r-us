@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CarResponse {
     int id;
-
     String brand;
     String model;
     double pricePrDay;
