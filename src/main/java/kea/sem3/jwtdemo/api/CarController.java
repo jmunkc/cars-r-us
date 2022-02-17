@@ -23,7 +23,7 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public CarResponse getCar(@PathVariable int id) throws Exception {
+    public CarResponse getCar(@PathVariable int id) {
         return carService.getCar(id,false);
     }
 
