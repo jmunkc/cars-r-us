@@ -45,6 +45,9 @@ public class MemberService {
     }
 
     public MemberResponse editMember(MemberRequest body, String userName){
+        if(!(memberRepository.existsById(userName))){
+            throw new Client4xxException("No Such member exists");
+        }
         Member memberToEdit = new Member(body);
         memberToEdit.setUsername(userName);
         memberRepository.save(memberToEdit);
@@ -52,6 +55,9 @@ public class MemberService {
     }
 
     public void deleteMember(String userName){
+        if(!(memberRepository.existsById(userName))){
+            throw new Client4xxException("No Such member exists");
+        }
         memberRepository.deleteById(userName);
     }
 }
