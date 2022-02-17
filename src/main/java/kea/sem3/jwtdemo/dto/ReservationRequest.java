@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationRequest {
+    private int id;
     private LocalDateTime reservationDate;
     private LocalDateTime rentalDate;
     private Car car;

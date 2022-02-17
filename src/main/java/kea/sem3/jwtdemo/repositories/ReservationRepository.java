@@ -7,10 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 
-public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
-    @Query("select (count(r) > 0) from Reservation r where r.car = :car")
-    boolean carExist(Car car);
-
-    @Query("select (count(r) > 0) from Reservation r where r.rentalDate = :rental_date")
-    boolean rentalDateExist(LocalDateTime rentalDate);
-}
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {}

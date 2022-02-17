@@ -30,7 +30,7 @@ public class ReservationService {
 
 
     public ReservationResponse addReservation(ReservationRequest body){
-        if(reservationRepository.carExist(body.getCar()) && reservationRepository.rentalDateExist(body.getRentalDate())){
+        if(reservationRepository.existsById(body.getId())){
             throw new Client4xxException("This car is already rented out on the specified date");
         }
         Reservation resNew = reservationRepository.save((new Reservation(body)));

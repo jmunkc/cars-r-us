@@ -39,6 +39,7 @@ public class Reservation {
     private Member member;
 
     public Reservation(ReservationRequest body) {
+        this.id = body.getId();
         this.reservationDate = body.getReservationDate();
         this.rentalDate = body.getRentalDate();
         this.car = body.getCar();
