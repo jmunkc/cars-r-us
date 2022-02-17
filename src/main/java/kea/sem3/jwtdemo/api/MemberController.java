@@ -21,8 +21,8 @@ public class MemberController {
     public List<MemberResponse> getMembers(){return memberService.getMembers();}
 
     @GetMapping("/{userName}")
-    public MemberResponse getMember(@PathVariable String userName) throws Exception{
-        return memberService.getMember(userName, false);
+    public MemberResponse getMember(@PathVariable String userName){
+        return memberService.getMember(userName);
     }
 
     @PostMapping

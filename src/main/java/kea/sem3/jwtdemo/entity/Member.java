@@ -1,5 +1,6 @@
 package kea.sem3.jwtdemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.sem3.jwtdemo.dto.CarRequest;
 import kea.sem3.jwtdemo.dto.MemberRequest;
 import lombok.Getter;
@@ -8,9 +9,11 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -41,10 +44,18 @@ public class Member extends BaseUser {
     @UpdateTimestamp
     LocalDateTime edited;
 
-    boolean isApproved;
+    Boolean isApproved;
 
     //Number between 0 and 10, ranking the customer
     byte ranking;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Reservation> reservations = new HashSet<>();
 
     public Member(String username, String email, String password, String firstName, String lastName, String street, String city, String zip) {
         super(username, email, password);
@@ -53,7 +64,6 @@ public class Member extends BaseUser {
         this.street = street;
         this.city = city;
         this.zip = zip;
-        addRole(Role.USER);
         ranking = 5; //Initial ranking
         isApproved = false;
     }

@@ -2,15 +2,12 @@ package kea.sem3.jwtdemo.configuration;
 
 import kea.sem3.jwtdemo.entity.*;
 import kea.sem3.jwtdemo.repositories.CarRepository;
-import kea.sem3.jwtdemo.repositories.MemberRespository;
+import kea.sem3.jwtdemo.repositories.MemberRepository;
 import kea.sem3.jwtdemo.security.UserRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
-
-import java.time.LocalDate;
-import java.time.Month;
 
 @Controller
 @Profile("!test")
@@ -18,12 +15,12 @@ public class MakeTestData implements ApplicationRunner {
 
 
     UserRepository userRepository;
-    MemberRespository memberRespository;
+    MemberRepository memberRepository;
     CarRepository carRepository;
 
-    public MakeTestData(UserRepository userRepository, MemberRespository memberRespository, CarRepository carRepository) {
+    public MakeTestData(UserRepository userRepository, MemberRepository memberRepository, CarRepository carRepository) {
         this.userRepository = userRepository;
-        this.memberRespository = memberRespository;
+        this.memberRepository = memberRepository;
         this.carRepository = carRepository;
     }
 
@@ -41,8 +38,8 @@ public class MakeTestData implements ApplicationRunner {
         userRepository.save(both);
 
 
-        memberRespository.save(new Member("KW","kw@a.dk","test12","Kurt","Wonnegut","Lyngbyvje 34","Lyngby","2800"));
-        memberRespository.save(new Member("HW","hw@a.dk","test12","Hanne","Wonnegut","Lyngbyvje 34","Lyngby","2800"));
+        memberRepository.save(new Member("KW","kw@a.dk","test12","Kurt","Wonnegut","Lyngbyvje 34","Lyngby","2800"));
+        memberRepository.save(new Member("HW","hw@a.dk","test12","Hanne","Wonnegut","Lyngbyvje 34","Lyngby","2800"));
 
         carRepository.save(new Car("Volvo", "C40", 560,10));
         carRepository.save(new Car("Volvo", "V70", 500,10));
@@ -64,7 +61,7 @@ public class MakeTestData implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
 
         userRepository.deleteAll();
 

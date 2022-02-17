@@ -1,38 +1,23 @@
 package kea.sem3.jwtdemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.sem3.jwtdemo.dto.CarRequest;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter @Setter
-@EqualsAndHashCode
-@ToString
+@NoArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    public Car() {}
-
-    public Car(String brand, String model, double pricePrDay,double discount) {
-        this.brand = brand;
-        this.model = model;
-        this.pricePrDay = pricePrDay;
-        this.bestDiscount = discount;
-    }
-    public Car(CarRequest body) {
-        this.brand = body.getBrand();
-        this.model = body.getModel();
-        this.pricePrDay = body.getPricePrDay();
-        this.bestDiscount = body.getBestDiscount();
-    }
 
     String brand;
 
@@ -49,5 +34,29 @@ public class Car {
 
     @UpdateTimestamp
     LocalDateTime edited;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "car",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Reservation> reservations = new HashSet<>();
+
+
+    public Car(String brand, String model, double pricePrDay,double discount) {
+        this.brand = brand;
+        this.model = model;
+        this.pricePrDay = pricePrDay;
+        this.bestDiscount = discount;
+    }
+    public Car(CarRequest body) {
+        this.brand = body.getBrand();
+        this.model = body.getModel();
+        this.pricePrDay = body.getPricePrDay();
+        this.bestDiscount = body.getBestDiscount();
+    }
+
+
 
     }

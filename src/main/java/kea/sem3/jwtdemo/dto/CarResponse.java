@@ -6,7 +6,6 @@ import kea.sem3.jwtdemo.entity.Car;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,8 +40,7 @@ public class CarResponse {
     }
 
     public static List<CarResponse> getCarsFromEntities(List<Car> cars){
-        //We will do this together
-        return cars.stream().map(car-> new CarResponse(car,false)).collect(Collectors.toList());
+                return cars.stream().map(car-> new CarResponse(car,false)).collect(Collectors.toList());
 
     }
 }
