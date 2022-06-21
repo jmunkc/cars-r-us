@@ -60,17 +60,17 @@ class MemberControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("a@mail.dk"));
     }
 
-//    @Test
-//    void addMember() throws Exception {
-//        MemberRequest newMem = new MemberRequest("a", "a@mail.dk", "aaa", "af", "al", "avej", "aby", "2000");
-//        mockMvc.perform(MockMvcRequestBuilders.post("/api/members")
-//                .contentType("application/json")
-//                .accept("application/json")
-//                .content(objectMapper.writeValueAsString(newMem)))
-//                .andExpect(status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
-//        assertEquals(6, memberRepository.count());
-//    }
+    @Test
+    void addMember() throws Exception {
+        MemberRequest newMem = new MemberRequest("a", "a@mail.dk", "aaa", "af", "al", "avej", "aby", "2000");
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/members")
+                .contentType("application/json")
+                .accept("application/json")
+                .content(objectMapper.writeValueAsString(newMem)))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.userName").exists());
+        assertEquals(6, memberRepository.count());
+    }
 
     @Test
     void editMember() {
